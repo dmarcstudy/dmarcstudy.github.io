@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="generator" content="Hugo 0.89.4"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>DMARC Study</title>
+    <title>DMARC Study - Abstract</title>
     <base href="http://localhost:63342/dmarcstudy.github.io">
 
 
@@ -61,9 +60,9 @@
     <script>var clicky_site_ids = clicky_site_ids || [];
     clicky_site_ids.push(101238267);</script>
     <script async src="//static.getclicky.com/js"></script>
-    <p>
-        <noscript>
-    <p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101238267ns.gif"/></p></noscript></p>
+<!--    <p>-->
+<!--        <noscript>-->
+<!--    <p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101238267ns.gif"/></p></noscript></p>-->
     <div class="jumbotron">
     <div class="container">
         <h3 align='right'><i>USENIX Security 2023</i></h3>
@@ -80,6 +79,50 @@
         </h5>
     </div>
 </div>
+    <h1 id="about-this-study">About This Study</h1>
+    <p>Email, since its invention, has become the most widely used communication system and SMTP is the standard for
+        email transmission on the Internet. However, SMTP lacks built-in security features, such as sender
+        authentication, making it vulnerable to attacks, including sender spoofing. To address the threat of spoofing,
+        several security extensions, such as SPF or DKIM, have been proposed. Domain-based Message Authentication
+        Reporting and Conformance (DMARC) was introduced in 2012 as a way for domain name owners to publish desired
+        actions for email receivers to take through a DNS record if SPF or DKIM validation fails. The DMARC record can
+        also request email receivers to send machine-generated reports back to the specified addresses to aid domain
+        name owners in detecting and evaluating the risk of spoofed emails. However, DMARC’s complexity creates
+        opportunities for mismanagement that can be exploited by attackers. This paper presents a large-scale and
+        comprehensive measurement study of DMARC reporting deployment and management. We collected data for all
+        second-level domains under the .com, .net, .org, and .se TLDs over 13 months to analyze deployment and
+        management from the domain name owner’s perspective. Additionally, we investigated 7 popular email hosting
+        services and 2 open-source DMARC reporting software to understand their reporting practices. Our study reveals
+        pervasive mismanagement and missing security considerations in DMARC reporting. For example, we found that a
+        single email from an attacker can make a victim SMTP server receive a large number of reports with a high
+        amplification factor (e.g., 1,460×) by exploiting misconfigured SMTP servers. Based on our findings of several
+        operational misconfigurations for DMARC reporting, we provide recommendations for improvement.</p>
+    <h1 id="about-the-artifacts">About the Dataset</h1>
+    <p>The dataset is largely composed of the two parts:</p>
+    <ul>
+        <li>
+            <p>DNS scans, which focus on (1) how we collect the data (i.e., measurement codes), (2) how we
+                analyze the collected data (i.e., analysis codes) &mdash; Section 3 in the paper.</p>
+        </li>
+        <li>
+            <p>Survey questions and responses, which focus on the qualitative study.
+                &mdash; Section 6 in the paper.</p>
+        </li>
+    </ul>
+    <p><b>
+        <center> This paper has been accepted at USENIX Security'23.
+        </center></b>
+        <b>
+            <center> The paper has been updated and is available <a
+                    href="https://taejoong.github.io/pubs/publications/ashiq-2023-dmarc.pdf">here</a>.
+            </center></b></p>
+<!--    <h1 id="about-criticism">About Criticism</h1>-->
+<!--    <p>After the paper was published, we have received many feedback from the DANE community; especially, the two-->
+<!--        authors of RFC7671, Viktor Dukhovni and Wes Hardaker, helped us a lot improve the quality of the paper. Our-->
+<!--        response is available <a href="https://dane-study.github.io/security2020/critics/">here</a>.</p>-->
+<!--    <div>-->
+<!--        <center><img src="figure/usenix_artifact_evaluation_passed_new.png"></center>-->
+<!--    </div>-->
 </main>
 <footer class="container-fluid page-footer" style="display: flex; align-items: center">
 </footer>
