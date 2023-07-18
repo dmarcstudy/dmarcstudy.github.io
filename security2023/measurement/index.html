@@ -69,8 +69,8 @@
             <p>Second, you can (1) download our raw datasets (thus, not re-running our measurement source codes), (2)
                 run our analysis scripts, and (3) run our plotting scripts. As you do not need to run our measurement
                 scripts to collect your own datasets, it should be faster than the first approach. However, our dataset
-                might be too big to run as it spans four months and are collected from five vantage points. Thus,
-                depending on your computational resource, it may take several hours (or days) to run our analysis
+                might be too big to run as it spans more than a year. Thus,
+                depending on your computational resource, it may take several hours (or days) to run our
                 scripts. For your information, we used Spark clusters to efficiently analyze the datasets. <em>For the
                     ones who are interested in this approach, you can skip the Section 3 and start this page from
                     Section 2 and 1.</em></p>
@@ -166,9 +166,8 @@
         After executing the analysis scripts you may use those output files as inputs to the above plotting scripts.</p>
     <h2 id="datasets-and-scripts-1">Datasets and scripts</h2>
     <h3 id="1-raw-measurement-datasets-and-prerequisites-for-the-analysis">(1) Raw (measurement) datasets and
-        prerequisites for the analysis</h3>
+        prerequisites for the analysis. We used ZDNS to crawl DNS records quickly.</h3>
 
-    Require ZDNS
 
     <table class="table table-dark table-striped table-bordered">
         <thead>
@@ -199,7 +198,7 @@
         </tr>
         <tr>
             <td><code>Intermediary data</code></td>
-            <td><a href="https://mmlab.snu.ac.kr/~hmlee/dane/security2020/intermediary_data.html">link</a></td>
+            <td><a href="#">link</a></td>
             <td>Intermediary datasets which are outputs of Spark scripts and also can be used as an input for analysis
                 scripts.
             </td>
@@ -259,9 +258,7 @@
 
     <h2 id="how-to-use-the-datasets-and-scripts">How to use the datasets and scripts?</h2>
     <h3 id="1-preprocessing-the-raw-datasets">(1) Preprocessing the raw datasets.</h3>
-    <p>We had collected two raw datasets: TLSA records (via DNS) and their certificates (via STARTTLS).
-        To use DANE correctly, these two objects have to be matched; thus, we read these two datasets using <code>raw-mergy.py</code>
-        and generates the output as a JSON format.
+    <p>We had collected two raw datasets: MX records and DMARC records for each domain in the .com, .net, .org, and .se zone.
         After downloading the <code>hourly dataset</code>, configure the input and output path (global variable in the
         script) for a city (e.g., virginia) you want to merge and run <code>raw-merge.py</code>.</p>
     <pre tabindex="0"><code>python3 raw-merge.py 190711 191031
