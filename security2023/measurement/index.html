@@ -231,7 +231,19 @@
             <td></td>
         </tr>
         <tr>
-            <td><code>dmarc-reporting-figures.py</code></td>
+            <td><code>fig2.py</code></td>
+            <td><a href="#">link</a></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td><code>fig3.py</code></td>
+            <td><a href="#">link</a></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td><code>fig4-5.py</code></td>
             <td><a href="#">link</a></td>
             <td>
             </td>
@@ -256,25 +268,6 @@
 </code></pre>
     <p>After execution, merged outputs are placed in the <code>[output_path]/[city]/</code> directory.</p>
     <p>Below JSON data is an example of a merged output.</p>
-    <pre tabindex="0"><code>...
-{
-  &quot;domain&quot;: &quot;mail.ietf.org.&quot;,
-  &quot;port&quot;: &quot;25&quot;,
-  &quot;time&quot;: &quot;20191031 9&quot;,
-  &quot;city&quot;: &quot;virginia&quot;,
-  &quot;tlsa&quot;: {
-  	    &quot;dnssec&quot;: &quot;Secure&quot;, // DNSSEC validation result
-  	    &quot;record_raw&quot;: &quot;AACBoAABAAIABwABA18yNQRfdGNwBG1haWwEaWV0ZgNvcmcAADQAAQNfMjUEX3...&quot; // DNS wire-format TLSA record, Base64 Encoded
-  	    },
-
-  &quot;starttls&quot;: {
-  	    &quot;certs&quot;: &quot;[&quot;LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUdWekNDQlQrZ0F3SUJBZ...&quot;, // PEM format certificate, Base64 Encoded
-  	    	       &quot;LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZBRENDQStpZ0F3SUJBZ...&quot;,
-  	    	       &quot;LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVvRENDQTRpZ0F3SUJBZ...&quot;]
-  }
-}
-...
-</code></pre>
     <p>Now you are ready to run the Spark scripts.</p>
     <h3 id="2-analyzing-the-merged-datasets">(2) Analyzing the merged datasets</h3>
     <p>Apache Spark is specialized for big data processing using multiple cores at the same time. However, it may not
@@ -288,7 +281,6 @@
         <thead>
         <tr>
             <th>Result</th>
-            <th>Spark</th>
             <th>Analysis</th>
             <th>Gnuplot script</th>
         </tr>
@@ -296,51 +288,23 @@
         <tbody>
         <tr>
             <td>Figure 2</td>
-            <td>-</td>
-            <td>-</td>
-            <td><code>2years-tlsa-ratio-per-tld-split.plot</code></td>
+            <td>fig2.py</td>
+            <td><code>dmarc-deployment.plot</code></td>
         </tr>
         <tr>
             <td>Figure 3</td>
-            <td>-</td>
-            <td><code>alexa1m-dane-stat.py</code></td>
-            <td><code>alexa-tlsa-adoption.plot</code></td>
+            <td>fig3.py</td>
+            <td><code>cdf-report-centrality.plot</code></td>
         </tr>
         <tr>
             <td>Figure 4</td>
-            <td>-</td>
-            <td>-</td>
-            <td><code>2years-tlsa-ratio-per-tld-split-fallback.plot</code></td>
+            <td>fig4-5.py</td>
+            <td><code>alexa-1m-dmarc-deployment.plot</code></td>
         </tr>
         <tr>
             <td>Figure 5</td>
-            <td><code>dnssec.py </code></td>
-            <td><code>dnssec-stat.py</code></td>
-            <td><code>missing-dnssec.plot</code></td>
-        </tr>
-        <tr>
-            <td>Figure 6</td>
-            <td><code>starttls-error.py </code></td>
-            <td><code>starttls-error-stat.py</code></td>
-            <td><code>starttls-availability.plot</code></td>
-        </tr>
-        <tr>
-            <td>Figure 7</td>
-            <td><code>check-incorrect.py</code></td>
-            <td><code>check-incorrect-stat.py</code></td>
-            <td><code>incorrect-percent-per-comp.plot</code></td>
-        </tr>
-        <tr>
-            <td>Figure 8</td>
-            <td><code>valid-dn.py</code></td>
-            <td><code>valid-dn-stat.py</code></td>
-            <td><code>4months-valid-per-tld.plot</code></td>
-        </tr>
-        <tr>
-            <td>Section 5.5</td>
-            <td><code>rollover.py</code></td>
-            <td><code>rollover-stat.py</code></td>
-            <td>-</td>
+            <td><code>fig4-5.py</code></td>
+            <td><code>alexa-1m-dmarc-incorrect.plot	</code></td>
         </tr>
         </tbody>
     </table>
@@ -367,169 +331,12 @@
     <p>The below table describes each of the Spark script that we use for the analyses.</p>
 
 
-    <table class="table table-dark table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Filename</th>
-            <th>Description</th>
-            <th>Input</th>
-            <th>Output (same as the ones in <a
-                    href="https://mmlab.snu.ac.kr/~hmlee/dane/security2020/intermediary_data.html">Intermediary data</a>)
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td><code>chain-validation.py</code></td>
-            <td>It verifies a chain of certificates.</td>
-            <td><code>root-ca-list</code></td>
-            <td><code>chain_validation_output.tar.gz</code></td>
-        </tr>
-        <tr>
-            <td><code>dane-validation.py</code></td>
-            <td>It validates DANE based on <a href="https://tools.ietf.org/html/rfc7671">RFC7671</a>.</td>
-            <td>the output of <code>chain-validation.py</code><br>(e.g., chain_output_virginia/ in <code>chain_validation_output.tar.gz</code>)
-            </td>
-            <td><code>dane_validation_output.tar.gz</code></td>
-        </tr>
-        <tr>
-            <td><code>dnssec.py</code></td>
-            <td>It checks DNSSEC validity of TLSA records.</td>
-            <td>-</td>
-            <td><code>dnssec_output.tar.gz</code></td>
-        </tr>
-        <tr>
-            <td><code>starttls-error.py</code></td>
-            <td>It classifies the reasons of STARTTLS scanning failure.</td>
-            <td>-</td>
-            <td><code>starttls_error_output.tar.gz</code></td>
-        </tr>
-        <tr>
-            <td><code>check-incorrect.py</code></td>
-            <td>It classify the reasons of DANE validation failure.</td>
-            <td>-</td>
-            <td><code>check_incorrect_output.tar.gz</code></td>
-        </tr>
-        <tr>
-            <td><code>rollover-candidate.py</code></td>
-            <td>It extracts the domains who have conducted rollover.</td>
-            <td><code>tlsa-base-domains-seeds</code></td>
-            <td><code>rollover_candidate_output.tar.gz</code></td>
-        </tr>
-        <tr>
-            <td><code>rollover.py</code></td>
-            <td>It evaluates rollover behavior of domains.</td>
-            <td>the output of <code>rollover-candidate-sub.py</code><br>(e.g., rollover-cand-merged-virginia.txt in
-                <code>rollover_cand_merged_output.tar.gz</code>)
-            </td>
-            <td><code>rollover_output.tar.gz</code></td>
-        </tr>
-        <tr>
-            <td><code>valid-dn.py</code></td>
-            <td>It counts the number of domains associated with mail servers which have valid TLSA records.</td>
-            <td>the output of <code>dane-validation.py</code><br>(e.g., dane_output_virginia/ in <code>dane_validation_output.tar.gz</code>)
-                &amp; <code>mx-with-tlsa</code></td>
-            <td><code>valid_dn_output.tar.gz</code></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <style>
-        table, th, td {
-            text-align: center;
-        }
-    </style>
-
     <h4 id="running-analysis-scripts">Running analysis scripts</h4>
     <p>After getting outputs from the Spark scripts, you can analyze those outputs. <code>stats-codes.tar.gz</code>
         contains nine analysis scripts for this purpose. The output files must be same as the ones in the <a
                 href="https://mmlab.snu.ac.kr/~hmlee/dane/security2020/analytics_data.html"><code>Analytics</code></a>.
     </p>
 
-
-    <table class="table table-dark table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Filename</th>
-            <th>Description</th>
-            <th>Input</th>
-            <th>Output</th>
-            <th>Misc.</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td><code>dane-validation-stat.py</code></td>
-            <td>It calculates stats of dane validation results.</td>
-            <td>the output of <code>dane-validation.py</code><br>(e.g., dane_output_[<em>city</em>]/ in <code>dane_validation_output.tar.gz</code>)
-            </td>
-            <td><code>dane_valid_stat_output.tar.gz</code></td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td><code>dnssec-stat.py</code></td>
-            <td>It calculates stats of dnssec validation results.</td>
-            <td>the output of <code>dnssec.py</code><br>(e.g., dnssec_output_[<em>city</em>]/ in <code>dnssec_output.tar.gz</code>)
-            </td>
-            <td><code>dnssec_stat_output.tar.gz</code></td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td><code>starttls-error-stat.py</code></td>
-            <td>It calculates the stats of STARTTLS scanning errors.</td>
-            <td>the output of <code>starttls-error.py</code><br>(e.g., starttls_error_output_[<em>city</em>]/ in <code>starttls_error_output.tar.gz</code>)
-            </td>
-            <td><code>starttls_error_stat_output.tar.gz</code></td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td><code>check-incorrect-stat.py</code></td>
-            <td>It calculates stats of dane validation failure reasons.</td>
-            <td>the output of <code>check-incorrect.py</code><br>(e.g, incorrect_output_[<em>city</em>]/ in <code>check_incorrect_output.tar.gz</code>)
-            </td>
-            <td><code>check_incorrect_stat_output.tar.gz</code></td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td><code>rollover-candidate-sub.py</code></td>
-            <td>It finds the domains who have conducted rollover.</td>
-            <td>the output of <code>rollover-candidate.py</code><br>(e.g., rollover_cand_output_virginia/ in <code>rollover_candidate_output.tar.gz</code>)
-            </td>
-            <td><code>rollover_cand_merged_output.tar.gz</code></td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td><code>rollover-stat.py</code></td>
-            <td>It calculates stats of rollover behavior of domains.</td>
-            <td>the output of <code>rollover.py</code><br>(e.g., rollover_output_virginia/ in <code>rollover_output.tar.gz</code>)
-            </td>
-            <td><code>rollover_stat_output.tar.gz</code></td>
-            <td>Section 5.5, Key Rollover</td>
-        </tr>
-        <tr>
-            <td><code>valid-dn-stat.py</code></td>
-            <td>It calculates stats of DANE-valid domains for each TLD.</td>
-            <td>the output of <code>valid-dn.py</code><br>(e.g., valid_dn_virginia/ in
-                <code>valid_dn_output.tar.gz</code>)
-            </td>
-            <td><code>valid_dn_stat_output.tar.gz</code></td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td><code>alexa1m-dane-stat.py</code></td>
-            <td>It calculates stats of Alexa 1M domains who have TLSA records.</td>
-            <td><code>alexa1m-mx</code>, <code>alexa1m-tlsa</code>, <code>alexa-top1m.csv</code></td>
-            <td><code>alexa_dane_stat_output.tar.gz</code></td>
-            <td>-</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <style>
-        table, th, td {
-            text-align: center;
-        }
-    </style>
 
     <h1 id="section3">3. Running our measurement codes to get your own raw datasets (TLSA records and their
         certificates)</h1>
@@ -555,12 +362,12 @@
         </thead>
         <tbody>
         <tr>
-            <td><code>tlsa-scan.go</code></td>
+            <td><code>email-sender-auth.py</code></td>
             <td>It fetches TLSA records from a list of domains.</td>
             <td><a href="/codes/tlsa-scan.go">link</a><sup>1</sup></td>
         </tr>
         <tr>
-            <td><code>starttls-scan.go</code></td>
+            <td><code>dns-crawl.py</code></td>
             <td>It collects certificates via STARTTLS.</td>
             <td><a href="/codes/starttls-scan.go">link</a></td>
         </tr>
@@ -582,43 +389,6 @@
         collect their TLSA records. The output has the following format.</p>
 
 
-    <table class="table table-dark table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>TLSA-base-domain</th>
-            <th>Vantage point</th>
-            <th>DNSSEC validity <sup>1</sup></th>
-            <th>TLSA records<sup>2</sup></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>_25._tcp.mail.ietf.org.</td>
-            <td>Virginia</td>
-            <td>Secure</td>
-            <td>AACBoAABAAIAB&hellip;</td>
-        </tr>
-        <tr>
-            <td>_25._tcp.mail.tutanota.de.</td>
-            <td>Virginia</td>
-            <td>Secure</td>
-            <td>AACBoAABAAIA&hellip;</td>
-        </tr>
-        <tr>
-            <td>&hellip;</td>
-            <td>&hellip;</td>
-            <td>&hellip;</td>
-            <td>&hellip;</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <style>
-        table, th, td {
-            text-align: center;
-        }
-    </style>
-
     <p><sup>1</sup> The result of DNSSEC validation: <code>Secure</code> indicates that a domain can be validated.
         <code>Insecure</code> indicates that a domain cannot be validated because it does not have a DS record. <code>Bogus</code>
         indicates that a domain cannot be validated because it has invalid DNSSEC records such as expired RRSIGs.</p>
@@ -626,52 +396,6 @@
     <h3 id="2-scan-starttls-certificates">2. Scan STARTTLS certificates</h3>
     <p>The script <code>starttls-scan.go</code> will read a list of domains in the <code>mx-with-tlsa</code> file and
         collect certificates presented via STARTTLS. The output has the following format.</p>
-
-
-    <table class="table table-dark table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Domains</th>
-            <th>Port</th>
-            <th>Vantage point</th>
-            <th>Status<sup>1</sup></th>
-            <th># of presented certificates<sup>2</sup></th>
-            <th>Certificates<sup>3</sup></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>mail.ietf.org</td>
-            <td>25</td>
-            <td>Virginia</td>
-            <td>Success</td>
-            <td>4</td>
-            <td>LS0RUaAB&hellip;, WjGdVBWYi&hellip;, 0s3FTFRuZ1&hellip;, eFKdDRBO&hellip;</td>
-        </tr>
-        <tr>
-            <td>mail.tutanota.de.</td>
-            <td>25</td>
-            <td>Virginia</td>
-            <td>Success</td>
-            <td>4</td>
-            <td>LSSf7JanC&hellip;, ODlF4NEF&hellip;, SA3S29K&hellip;, Z1RstKS&hellip;</td>
-        </tr>
-        <tr>
-            <td>&hellip;</td>
-            <td>&hellip;</td>
-            <td>&hellip;</td>
-            <td>&hellip;</td>
-            <td>&hellip;</td>
-            <td>&hellip;</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <style>
-        table, th, td {
-            text-align: center;
-        }
-    </style>
 
     <p><sup>1</sup> Whether a certificate has been successfully fetched or not.</p>
     <p><sup>2</sup> The number of certificates presented via STARTTLS.</p>
