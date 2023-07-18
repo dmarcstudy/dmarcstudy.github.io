@@ -56,17 +56,19 @@
     <p>Our paper is based on the measurement: DMARC and TLS-RPT records.
         We had collected them over 1 year. Due to the massive size of these datasets, we used
         <a href="https://spark.apache.org/">Apache Spark</a> to process them in a parallel manner. Here, we would like
-        to provide three approaches to reproduce our measurement results:</p>
+        to provide two approaches to reproduce our measurement results:</p>
     <ul>
+<!--        <li>-->
+<!--            <p>First, you can (1) use the <a href="#">zdns</a> module to crawl DMARC, MX records-->
+<!--                , and gather your own dataset, (2) analyze the raw-->
+<!--                datasets you have obtained, and (3) run our plotting scripts. As the dataset will not be exactly as same-->
+<!--                as the ones we used the paper, you might need to tweak the analysis codes a bit and your figures might-->
+<!--                look different . Thus, we recommend this approach for-->
+<!--                the researchers who are interested in extending our work. <em>For the ones who are interested in this-->
+<!--                    approach, you can start this from the Section 3 (, 2, and 1 in a reverse order).</em></p>-->
+<!--        </li>-->
         <li>
-            <p>First, you can (1) run our measurement source codes to collect your own datasets, (2) analyze the raw
-                datasets you have obtained, and (3) run our plotting scripts. As the dataset will not be exactly as same
-                as the ones we used the paper, your figures might look different. Thus, we recommend this approach for
-                the researchers who are interested in extending our work. <em>For the ones who are interested in this
-                    approach, you can start this from the Section 3 (, 2, and 1 in a reverse order).</em></p>
-        </li>
-        <li>
-            <p>Second, you can (1) download our raw datasets (thus, not re-running our measurement source codes), (2)
+            <p>First, you can (1) download our raw datasets (not re-running the measurement), (2)
                 run our analysis scripts, and (3) run our plotting scripts. As you do not need to run our measurement
                 scripts to collect your own datasets, it should be faster than the first approach. However, our dataset
                 might be too big to run as it spans more than a year. Thus,
@@ -76,12 +78,17 @@
                     Section 2 and 1.</em></p>
         </li>
         <li>
-            <p>Finally, you can (1) just use our analytics datasets, which are processed through our analysis codes
+            <p>Second, you can (1) just use our analytics datasets, which are processed through our analysis codes
                 based on the raw datasets. We believe this way to be the fastest way that you can check the consistency
                 of the figures on the paper. <em>For the ones who are interested in this approach, you only need to read
                     Section 1.</em></p>
         </li>
     </ul>
+    <p>You can also gather your own dataset by using the <a href="#">zdns</a> module to crawl DMARC, MX records. In this case,
+        , as the dataset will not be exactly as same
+                as the ones we used in the paper, you might need to tweak the analysis codes a bit and your figures will
+                look different . Thus, we recommend this approach for
+                the researchers who are interested in extending our work</p>
     <h1 id="1-reproducing-the-figures-from-the-analytics">1. Reproducing the figures from the analytics</h1>
     <p>This section introduces a very simple way to reproduce all of the figures in the paper by using the analytics
         datasets and plotting scripts.</p>
@@ -166,7 +173,7 @@
         After executing the analysis scripts you may use those output files as inputs to the above plotting scripts.</p>
     <h2 id="datasets-and-scripts-1">Datasets and scripts</h2>
     <h3 id="1-raw-measurement-datasets-and-prerequisites-for-the-analysis">(1) Raw (measurement) datasets and
-        prerequisites for the analysis. We used ZDNS to crawl DNS records quickly.</h3>
+        prerequisites for the analysis.</h3>
 
 
     <table class="table table-dark table-striped table-bordered">
@@ -196,13 +203,13 @@
                     href="https://toplists.github.io">top-lists study</a>.
             </td>
         </tr>
-        <tr>
-            <td><code>Intermediary data</code></td>
-            <td><a href="#">link</a></td>
-            <td>Intermediary datasets which are outputs of Spark scripts and also can be used as an input for analysis
-                scripts.
-            </td>
-        </tr>
+<!--        <tr>-->
+<!--            <td><code>Intermediary data</code></td>-->
+<!--            <td><a href="#">link</a></td>-->
+<!--            <td>Intermediary datasets which are outputs of Spark scripts and also can be used as an input for analysis-->
+<!--                scripts.-->
+<!--            </td>-->
+<!--        </tr>-->
         </tbody>
     </table>
 
@@ -224,11 +231,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td><code>dependencies</code></td>
-            <td><a href="#">link</a></td>
-            <td></td>
-        </tr>
+<!--        <tr>-->
+<!--            <td><code>dependencies</code></td>-->
+<!--            <td><a href="#">link</a></td>-->
+<!--            <td></td>-->
+<!--        </tr>-->
         <tr>
             <td><code>fig2.py</code></td>
             <td><a href="#">link</a></td>
@@ -257,147 +264,42 @@
     </style>
 
     <h2 id="how-to-use-the-datasets-and-scripts">How to use the datasets and scripts?</h2>
-    <h3 id="1-preprocessing-the-raw-datasets">(1) Preprocessing the raw datasets.</h3>
     <p>We had collected two raw datasets: MX records and DMARC records for each domain in the .com, .net, .org, and .se zone.
-        After downloading the <code>hourly dataset</code>, configure the input and output path (global variable in the
-        script) for a city (e.g., virginia) you want to merge and run <code>raw-merge.py</code>.</p>
-    <pre tabindex="0"><code>python3 raw-merge.py 190711 191031
-</code></pre>
-    <p>After execution, merged outputs are placed in the <code>[output_path]/[city]/</code> directory.</p>
-    <p>Below JSON data is an example of a merged output.</p>
-    <p>Now you are ready to run the Spark scripts.</p>
-    <h3 id="2-analyzing-the-merged-datasets">(2) Analyzing the merged datasets</h3>
-    <p>Apache Spark is specialized for big data processing using multiple cores at the same time. However, it may not
-        work efficiently when the datasets have many dependencies between themselves. Thus, we first use Spark to
-        extract the information that we are interested in from our raw datasets and we run a (analysis) python script to
-        analyze them in depth.</p>
-    <p>The below table shows which Spark, analysis, and gnuplot scripts are used to get results in the paper.</p>
+        Dataset for MX record also contain NS record for the same set of domains.
+        After downloading them, you can run each of the given codes and generate data for the associated figures. It should be noted
+    that the scripts assume you will keep your data in the HDFS cluster and use Apache Spark that can read from the cluster.
+<!--    <p>The below table shows which Spark, analysis, and gnuplot scripts are used to get results in the paper.</p>-->
+
+<!--    <h1 id="section3">3. Running our measurement codes to get your own raw datasets</h1>-->
 
 
-    <table class="table table-dark table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Result</th>
-            <th>Analysis</th>
-            <th>Gnuplot script</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Figure 2</td>
-            <td>fig2.py</td>
-            <td><code>dmarc-deployment.plot</code></td>
-        </tr>
-        <tr>
-            <td>Figure 3</td>
-            <td>fig3.py</td>
-            <td><code>cdf-report-centrality.plot</code></td>
-        </tr>
-        <tr>
-            <td>Figure 4</td>
-            <td>fig4-5.py</td>
-            <td><code>alexa-1m-dmarc-deployment.plot</code></td>
-        </tr>
-        <tr>
-            <td>Figure 5</td>
-            <td><code>fig4-5.py</code></td>
-            <td><code>alexa-1m-dmarc-incorrect.plot	</code></td>
-        </tr>
-        </tbody>
-    </table>
+<!--    <table class="table table-dark table-striped table-bordered">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Filename</th>-->
+<!--            <th>Descrption</th>-->
+<!--            <th>Download</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr>-->
+<!--            <td><code>email-sender-auth.py</code></td>-->
+<!--            <td>It fetches TLSA records from a list of domains.</td>-->
+<!--            <td><a href="/codes/tlsa-scan.go">link</a><sup>1</sup></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><code>dns-crawl.py</code></td>-->
+<!--            <td>It collects certificates via STARTTLS.</td>-->
+<!--            <td><a href="/codes/starttls-scan.go">link</a></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
 
-    <style>
-        table, th, td {
-            text-align: center;
-        }
-    </style>
-
-    <p>For example, to get the input dataset for Figure 5, run Spark script <code>dnssec.py</code>. Next, run the
-        analysis script <code>dnssec-stat.py</code> using the output of <code>dnssec.py</code> as an input. Finally, you
-        can draw Figure 5 with the <code>missing-dnssec.plot</code> script using the output of
-        <code>dnssec-stat.py</code> as an input.</p>
-    <h4 id="running-spark-scripts">Running Spark scripts</h4>
-    <p>The <code>spark-codes.tar.gz</code> file contains nine Spark scripts that run on a Spark machine. Please note
-        that these scripts take the <em>merged data</em> as an input.
-        We use a third-party library that we crafted, <a href="http://www.dnsypython.org">dns</a>. You may want to
-        install this library on the Spark machine or you can pass this library to the machine when you run the Spark
-        code by using the <code>--py-files</code> option. For the sake of simplicity, we have provided a package, <code>dependencies.zip</code>.
-    </p>
-    <pre tabindex="0"><code>spark-submit --py-files=/path/to/dependencies.zip [spark_script.py]
-</code></pre>
-    <p>The below table describes each of the Spark script that we use for the analyses.</p>
-
-
-    <h4 id="running-analysis-scripts">Running analysis scripts</h4>
-    <p>After getting outputs from the Spark scripts, you can analyze those outputs. <code>stats-codes.tar.gz</code>
-        contains nine analysis scripts for this purpose. The output files must be same as the ones in the <a
-                href="https://mmlab.snu.ac.kr/~hmlee/dane/security2020/analytics_data.html"><code>Analytics</code></a>.
-    </p>
-
-
-    <h1 id="section3">3. Running our measurement codes to get your own raw datasets (TLSA records and their
-        certificates)</h1>
-    <p>This section introduces our source codes that we used to collect our datasets. We used these source codes to
-        collect TLSA records and their certificates by sending average 11,972 TLSA record lookups as well as the
-        certificate chains every hour from July 11, 2019 to October 31, 2019. We refer to these measurements as the
-        Hourly dataset.</p>
-    <p>What about Daily dataset? Because the Daily dataset that contains every domain names under top level domains was
-        collected using zone files that are given under agreement with registries, we cannot make them just publicly
-        available. Instead, we provide intermediary data (e.g. <code>tlsa-counts.csv</code>) extracted from the Daily
-        dataset which is needed to run our scripts.</p>
-    <h2 id="scanning-source-codes">Scanning source codes</h2>
-    <p>
-
-
-    <table class="table table-dark table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Filename</th>
-            <th>Descrption</th>
-            <th>Download</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td><code>email-sender-auth.py</code></td>
-            <td>It fetches TLSA records from a list of domains.</td>
-            <td><a href="/codes/tlsa-scan.go">link</a><sup>1</sup></td>
-        </tr>
-        <tr>
-            <td><code>dns-crawl.py</code></td>
-            <td>It collects certificates via STARTTLS.</td>
-            <td><a href="/codes/starttls-scan.go">link</a></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <style>
-        table, th, td {
-            text-align: center;
-        }
-    </style>
-
-    <sup>1</sup> This requires the following third-party libraries: <a
-        href="https://nlnetlabs.nl/projects/unbound/about/">Unbound</a>, <a href="https://github.com/miekg/unbound">Unbound
-    Golang Wrapper</a>, and <a href="https://nlnetlabs.nl/projects/ldns/about/">ldns</a>.</p>
-    <h2 id="how-to-scan-tlsa-records-and-their-certificates">How to scan TLSA records and their certificates</h2>
-    <h3 id="1-scan-tlsa-records">1. Scan TLSA records</h3>
-    <p>The script <code>tlsa-scan.go</code> will read a list of domains in the <code>mx-with-tlsa</code> file and
-        collect their TLSA records. The output has the following format.</p>
-
-
-    <p><sup>1</sup> The result of DNSSEC validation: <code>Secure</code> indicates that a domain can be validated.
-        <code>Insecure</code> indicates that a domain cannot be validated because it does not have a DS record. <code>Bogus</code>
-        indicates that a domain cannot be validated because it has invalid DNSSEC records such as expired RRSIGs.</p>
-    <p><sup>2</sup> TLSA records: wire formatted TLSA records (base64 encoded)</p>
-    <h3 id="2-scan-starttls-certificates">2. Scan STARTTLS certificates</h3>
-    <p>The script <code>starttls-scan.go</code> will read a list of domains in the <code>mx-with-tlsa</code> file and
-        collect certificates presented via STARTTLS. The output has the following format.</p>
-
-    <p><sup>1</sup> Whether a certificate has been successfully fetched or not.</p>
-    <p><sup>2</sup> The number of certificates presented via STARTTLS.</p>
-    <p><sup>3</sup> A list of base64 encoded (PEM format) certificates (each certificate is comma seperated).</p>
-
+<!--    <style>-->
+<!--        table, th, td {-->
+<!--            text-align: center;-->
+<!--        }-->
+<!--    </style>-->
 </main>
 <noscript>
     <div class="alert alert-warning" role="alert">
