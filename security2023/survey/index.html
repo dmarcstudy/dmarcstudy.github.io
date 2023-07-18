@@ -28,6 +28,10 @@
         table.table-bordered > tbody > tr > td {
             border: 1px solid black !important;
         }
+        table, th, td {
+            text-align: center;
+            vertical-align: middle !important;
+        }
     </style>
     <noscript>
         <link rel="stylesheet" type="text/css" href="./css/noscript.css">
@@ -68,86 +72,71 @@
     <script>var clicky_site_ids = clicky_site_ids || [];
     clicky_site_ids.push(101238267);</script>
     <script async src="//static.getclicky.com/js"></script>
-    <table class="table table-responsive table-fit table-bordered table-hover table-condensed">
+    <table class="table table-dark table-striped table-fit table-bordered table-hover table-condensed">
         <thead>
         <tr>
             <th title="Field #1">Start Date</th>
             <th title="Field #2">End Date</th>
-            <th title="Field #3">I consent voluntarily to be a participant in this study and understand that I can
-                refuse to answer questions and I can withdraw from the study at any time, without having to give a
-                reason.
-            </th>
-            <th title="Field #4">I understand that information I provide will be used for scientific reports and
+            <th title="Field #3">I consent voluntarily to be a participant in this study and <br>understand that
+            I can refuse to answer questions and <br>I can withdraw from the study at any time, without having to give a
+                reason.</th>
+            <th title="Field #4">I understand that information I provide will be <br>used for scientific reports and
                 publications.
             </th>
-            <th title="Field #5">What is the name of your email server software? Or, what is the name of your MTA?</th>
-            <th title="Field #6"></th>
-            <th title="Field #7">Are you using any framework, setup tool, or how to for your mail server?</th>
-            <th title="Field #8"></th>
-            <th title="Field #9">How many email accounts do exist under your operated infrastructure?</th>
-            <th title="Field #10"></th>
-            <th title="Field #11">How many emails does your system receive on average per day?</th>
-            <th title="Field #12"></th>
-            <th title="Field #13">Do you frequently update your MTA or associated plugins and mail filters? By update,
-                we mean following the releases for the associated software and installing them regularly.
+            <th title="Field #5" colspan="2">What is the name of your email server software? <br>Or, what is the name of your MTA?</th>
+            <th title="Field #7" colspan="2">Are you using any framework, setup tool, <br>or how to for your mail server?</th>
+            <th title="Field #9" colspan="2">How many email accounts do exist <br>under your operated infrastructure?</th>
+            <th title="Field #11" colspan="2">How many emails does your system <br>receive on average per day?</th>
+            <th title="Field #13">Do you frequently update your MTA or <br>associated plugins and mail filters? <br>By update,
+                we mean following the releases for the associated <br>software and installing them regularly.
             </th>
-            <th title="Field #14">If yes, approximately when did you last update your MTA or any of the plugins and mail
+            <th title="Field #14">If yes, approximately when did you last update <br>your MTA or any of the plugins and mail
                 filters?
             </th>
-            <th title="Field #15">What security email protocols do you use?</th>
-            <th title="Field #16"></th>
-            <th title="Field #17"></th>
-            <th title="Field #18"></th>
-            <th title="Field #19"></th>
-            <th title="Field #20"></th>
-            <th title="Field #21"></th>
-            <th title="Field #22"></th>
-            <th title="Field #23"></th>
-            <th title="Field #24">Does your SMTP server support DMARC reporting? In other words, when you receive an
-                email from a sender domain that specified its intention to receive aggregate or/and failure reports via
+            <th title="Field #15" colspan="9">What security email protocols do you use?</th>
+            <th title="Field #24">Does your SMTP server support DMARC reporting? <br>In other words, when you receive an
+                email from a sender domain <br>that specified its intention to receive aggregate or/and failure reports <br>via
                 its DMARC setting, do you send aggregate or/and forensic reports to the specified addresses?
             </th>
-            <th title="Field #25">Do you use your own reporting setup or have you delegated the reporting setup to a
+            <th title="Field #25">Do you use your own reporting setup or <br>have you delegated the reporting setup to a
                 third-party provider?
             </th>
-            <th title="Field #26">Which DMARC reporting software are you using?</th>
-            <th title="Field #27"></th>
-            <th title="Field #28">Does your DMARC reporting software respect the reporting interval (RI tag) set by the
+            <th title="Field #26" colspan="2">Which DMARC reporting software are you using?</th>
+            <th title="Field #28">Does your DMARC reporting software respect the <br>reporting interval (RI tag) set by the
                 sender domain?
             </th>
-            <th title="Field #29">Does your DMARC reporting software follow the Failure Reporting Options (FO tag) set
+            <th title="Field #29">Does your DMARC reporting software follow the <br>Failure Reporting Options (FO tag) set
                 by the sender domain?
             </th>
-            <th title="Field #30">Does your DMARC reporting software perform an external destination verification if an
-                external domain is present in the RUA/ RUF tag of the sender’s DMARC setting?
+            <th title="Field #30">Does your DMARC reporting software perform an <br>external destination verification if an
+                external domain is present <br>in the RUA/ RUF tag of the sender’s DMARC setting?
             </th>
-            <th title="Field #31">What is the maximum number of mailto RUA tags your email server supports? To put it in
-                another way, if a sending domain has &quot;n&quot; mailto RUA tags in its DMARC TXT record, does your
-                server send a DMARC report to all those &quot;n&quot; addresses or it only sends a report to the first
-                few addresses? Please write the maximum value of &quot;n&quot; that your server supports.
+            <th title="Field #31">What is the maximum number of mailto RUA <br>tags your email server supports? <br>To put it in
+                another way, if a sending domain has &quot;n&quot; <br>mailto RUA tags in its DMARC TXT record, does your
+                server <br>send a DMARC report to all those &quot;n&quot; addresses <br>or it only sends a report to the first
+                few addresses? <br>Please write the maximum value of &quot;n&quot; <br>that your server supports.
             </th>
-            <th title="Field #32">What is the maximum number of mailto RUF tags your email server supports? To put it in
-                another way, if a sending domain has &quot;n&quot; mailto RUF tags in its DMARC TXT record, does your
-                server send a DMARC report to all those &quot;n&quot; addresses or it only sends a report to the first
-                few addresses? Please write the maximum value of &quot;n&quot; that your server supports.
+            <th title="Field #32">What is the maximum number of mailto RUF <br>tags your email server supports? <br>To put it in
+                another way, if a sending domain has &quot;n&quot; <br>mailto RUF tags in its DMARC TXT record, does your
+                server <br>send a DMARC report to all those &quot;n&quot; addresses <br>or it only sends a report to the first
+                few addresses? <br>Please write the maximum value of &quot;n&quot; <br>that your server supports.
             </th>
-            <th title="Field #33">Does your SMTP server support TLS-RPT reporting? In other words, in case there is a
-                failure of email delivery to another SMTP server and the recipient domain owner specified their
-                intention to receive failure reports via the SMTP TLS DNS record, do you send reports to the specified
+            <th title="Field #33">Does your SMTP server support TLS-RPT reporting? <br>In other words, in case there is a
+                failure of email delivery to another <br>SMTP server and the recipient domain owner specified their
+                intention to receive <br>failure reports via the SMTP TLS DNS record, do you send <br>reports to the specified
                 addresses?
             </th>
-            <th title="Field #34">Do you use your own reporting setup or have you delegated the reporting setup to a
+            <th title="Field #34">Do you use your own reporting setup or <br>have you delegated the reporting setup to a
                 third-party provider?
             </th>
-            <th title="Field #35">Which TLS-RPT reporting software are you using?</th>
-            <th title="Field #36"></th>
-            <th title="Field #37">Does your TLS-RPT reporting software perform an external destination verification if
-                an external domain is present in the RUA tag of the sender’s TLS-RPT setting?
+            <th title="Field #35" colspan="2">Which TLS-RPT reporting software are you using?</th>
+            <th title="Field #37" width="100">Does your TLS-RPT reporting software perform an <br>external destination verification if
+                an external domain is present in the <br>RUA tag of the sender’s TLS-RPT setting?
             </th>
-            <th title="Field #38">What is the maximum number of mailto RUA tags your email server supports? To put it in
-                another way, if a recipient domain has &quot;n&quot; mailto RUA tags in its TLS-RPT DNS record, does
-                your server send a TLS-RPT report to all those &quot;n&quot; addresses or it only sends a report to the
-                first few addresses? Please write the maximum value of &quot;n&quot; that your server supports.
+            <th title="Field #38">What is the maximum number of mailto RUA <br>tags your email server supports? <br>To put it in
+                another way, if a recipient domain has &quot;n&quot; mailto <br>RUA tags in its TLS-RPT DNS record, does
+                your server send a <br>TLS-RPT report to all those &quot;n&quot; addresses or it only sends a report to the
+                <br>first few addresses? Please write the maximum value of &quot;n&quot; <br>that your server supports.
             </th>
         </tr>
         </thead>
